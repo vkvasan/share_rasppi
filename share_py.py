@@ -258,6 +258,9 @@ if torch.cuda.is_available() and not cuda:
     print("You have a cuda device, so you might want to run with --cuda as option")
 device = torch.device("cuda:0" if cuda else "cpu")
 
+current_directory = os.getcwd()
+print("Current Directory:", current_directory)
+
 data_root = data_path + '/dataset/' + dataset
 config_file = data_path + '/configs/' + dataset + '.json'
 with open(config_file, 'r') as config_file:
@@ -297,6 +300,8 @@ dec = Decoder(embed_dim=1024, decoder_dim=128, vocab=word_list, encoder_dim=128,
 # Assuming 'config' is a dictionary containing 'run_tag'
 enc_load_path = os.path.join('model', f"{config['run_tag']}_enc.pth")
 dec_load_path = os.path.join('model', f"{config['run_tag']}_dec.pth")
+
+
 
 # Load the state dictionary from the file
 enc_state_dict = torch.load(enc_load_path)
